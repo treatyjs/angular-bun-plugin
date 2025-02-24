@@ -1,0 +1,23 @@
+{
+  "name": "@treaty/bun-angular",
+  "module": "src/index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "build": "bun build --output dist"
+  },
+  "dependencies": {
+    "@babel/core": "^7.26.9"
+  },
+  "devDependencies": {
+    "@types/babel__core": "^7.20.5",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5",
+    "@angular/compiler-cli": "^18.0.0 || ^19.0.0",
+    "@angular/build": "^18.0.0 || ^19.0.0",
+    "@ngtools/webpack": "^18.0.0 || ^19.0.0"
+  }
+}

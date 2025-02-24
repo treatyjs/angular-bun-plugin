@@ -1,0 +1,6 @@
+[serve.static]
+plugins = [
+    "bun-plugin-tailwind",
+    "@treaty/bun-angular-router",
+    "@treaty/bun-angular"
+]

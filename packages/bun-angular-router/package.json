@@ -1,0 +1,17 @@
+{
+  "name": "@treaty/bun-angular-router",
+  "module": "index.ts",
+  "type": "module",
+  "private": false,
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "build": "bun build --output dist"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5",
+    "@angular/router": "^18.0.0 || ^19.0.0"
+  }
+}
