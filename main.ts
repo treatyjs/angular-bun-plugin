@@ -1,4 +1,3 @@
-import '@angular/compiler'
 import { AppComponent } from './src/app.ng';
 import {
     type ApplicationConfig,

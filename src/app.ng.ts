@@ -6,6 +6,6 @@ import { Second } from './test.ng';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, Second],
-  template: 'JORDAN <app-test /> <router-outlet />',
+  template: 'JORDAN HALL<app-test /> <router-outlet />',
 })
 export class AppComponent {}
