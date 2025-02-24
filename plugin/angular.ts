@@ -4,6 +4,7 @@ import ts, { ScriptTarget, ModuleKind } from "typescript";
 import { mergeTransformers, replaceBootstrap } from '@ngtools/webpack/src/ivy/transformation';
 import { augmentProgramWithVersioning } from '@ngtools/webpack/src/ivy/host';
 import { normalize } from 'path';
+import { JavaScriptTransformer } from '@angular/build/private'
 setFileSystem(new NodeJSFileSystem());
 
 interface EmitFileResult {
@@ -68,37 +69,7 @@ function augmentHostWithResources(
     };
 }
 
-function createFileEmitter(
-    program: ts.Program,
-    transformers: ts.CustomTransformers = {},
-    onAfterEmit?: (sourceFile: ts.SourceFile) => void,
-): FileEmitter {
-    return async (file: string) => {
-        const sourceFile = program.getSourceFile(file);
-        if (!sourceFile) {
-            return undefined;
-        }
 
-        let code: string = '';
-        program.emit(
-            sourceFile,
-            (filename: string, data: string) => {
-                if (/\.[cm]?js$/.test(filename)) {
-                    if (data) {
-                        code = data;
-                    }
-                }
-            },
-            undefined /* cancellationToken */,
-            undefined /* emitOnlyDtsFiles */,
-            transformers,
-        );
-
-        onAfterEmit?.(sourceFile);
-
-        return { code, dependencies: [] };
-    };
-}
 
 
 export const Angular: BunPlugin = {
@@ -116,7 +87,7 @@ export const Angular: BunPlugin = {
             incremental: true
 		};
         const host = createCompilerHost({ options })
-        const ng = new NgtscProgram(["./main.ts"], options, host);
+        let ng = new NgtscProgram(["./main.ts"], options, host);
         augmentHostWithResources(
             host,
             (code, id) => { },
@@ -125,36 +96,94 @@ export const Angular: BunPlugin = {
             },
         );
 		await ng.compiler.analyzeAsync()
-		const program = ng.getReuseTsProgram();
+		let program = ng.getReuseTsProgram();
 
-        // const builder = ts.createAbstractBuilder(typeScriptProgram, host);
-
-        const fileEmitter = createFileEmitter(
-            program,
-            mergeTransformers(ng.compiler.prepareEmit().transformers, {
-                before: [replaceBootstrap(() => program.getTypeChecker())],
-            }),
-            () => [],
-        );
+        function createFileEmitter(
+            transformers: ts.CustomTransformers = {},
+            onAfterEmit?: (sourceFile: ts.SourceFile) => void,
+        ): FileEmitter {
+            return async (file: string) => {
+                const sourceFile = program.getSourceFile(file);
+                if (!sourceFile) {
+                    return undefined;
+                }
+        
+                let code: string = '';
+                program.emit(
+                    sourceFile,
+                    (filename: string, data: string) => {
+                        if (/\.[cm]?js$/.test(filename)) {
+                            if (data) {
+                                code = data;
+                            }
+                        }
+                    },
+                    undefined /* cancellationToken */,
+                    undefined /* emitOnlyDtsFiles */,
+                    transformers,
+                );
+        
+                onAfterEmit?.(sourceFile);
+        
+                return { code, dependencies: [] };
+            };
+        }
 
 		augmentProgramWithVersioning(program);
 
-    
-        
 		build.onLoad({ filter: /\.[cm]?ts?$/ }, async ({ path }) => {
             if (path.includes('node_modules')) {
                 return;
             }
+            // Check if the file is part of the program
+            let sourceFile = program.getSourceFile(path);
+            if (!sourceFile) {
+                // Add the file to the program if it's not recognized
+                const rootFileNames = [...program.getRootFileNames(), path];
+                ng = new NgtscProgram(rootFileNames, options, host);
+                await ng.compiler.analyzeAsync();
+                program = ng.getReuseTsProgram();
+                sourceFile = program.getSourceFile(path);
+            }
 
-			console.log("file to build: ", path);
-
-
+            const fileEmitter = createFileEmitter(
+                mergeTransformers(ng.compiler.prepareEmit().transformers, {
+                    before: [replaceBootstrap(() => program.getTypeChecker())],
+                }),
+                () => [],
+            );
 
 			const result = await fileEmitter(path);
 
-			return { contents: result?.code, loader: 'js',  } as OnLoadResult
-		})
+            if (!result) {
+                throw new Error(`Failed to emit file: ${path}`);
+            }
 
+			return { contents: result.code, loader: 'js' } as OnLoadResult;
+		});
+
+        const javascriptTransformer = new JavaScriptTransformer({
+            sourcemap: true,
+            advancedOptimizations: false,
+            jit: false,
+            
+        },  1);
+        const transpiler = new Bun.Transpiler({ loader: "ts" });
+    
+        build.onLoad({filter: /\.[cm]?[jt]s?$/ }, (async ({path}) => {
+          try {
+            const fileText = await Bun.file(path).text()
+            const contents = await javascriptTransformer.transformData(path, fileText, true, false);
+            const javascript = transpiler.transformSync(contents.toString());
+            await javascriptTransformer.close()
+            return {
+              contents: javascript,
+              loader: 'ts',
+            };
+          } catch (error) {
+            console.log('error:' ,error)
+          }
+        }))
 	},
 };
 

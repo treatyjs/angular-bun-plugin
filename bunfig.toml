@@ -1,2 +1,6 @@
 [serve.static]
-plugins = ["bun-plugin-tailwind", "./plugin/angular.ts"]
+plugins = [
+    "bun-plugin-tailwind",
+    "./plugin/routes.ts",
+    "./plugin/angular.ts"
+]
