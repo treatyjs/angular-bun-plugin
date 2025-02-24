@@ -111,7 +111,9 @@ export const Angular: BunPlugin = {
 			target: ScriptTarget.Latest,
 			module: ModuleKind.ESNext,
 			annotateForClosureCompiler: true,
-			compilationMode: "experimental-local",
+			compilationMode: "experimental-local", 
+            inlineSourceMap: true,
+            incremental: true
 		};
         const host = createCompilerHost({ options })
         const ng = new NgtscProgram(["./main.ts"], options, host);
