@@ -1,8 +1,13 @@
 {
-  "name": "bun-angular-example",
-  "module": "index.ts",
+  "name": "@treaty/bun-angular-example",
+  "module": "main.ts",
   "type": "module",
   "private": true,
+  "packageManager": "bun",
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "build": "bun build --output dist"
+  },
   "dependencies": {
     "@angular/animations": "^19.1.7",
     "@angular/common": "^19.1.7",

@@ -1,11 +1,13 @@
 {
   "name": "@treaty/bun-angular-router",
-  "module": "index.ts",
+  "version": "0.0.1",
+  "module": "src/index.ts",
+  "packageManager": "bun",
   "type": "module",
   "private": false,
   "scripts": {
     "check-types": "tsc --noEmit",
-    "build": "bun build --output dist"
+    "build": "bun build ./src/index.ts --outdir dist"
   },
   "devDependencies": {
     "@types/bun": "latest"

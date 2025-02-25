@@ -4,10 +4,7 @@
   "type": "module",
   "private": true,
   "packageManager": "bun",
-  "workspaces": [
-    "packages/*",
-    "apps/*"
-  ],
+  "workspaces": ["packages/*", "apps/*"],
   "dependencies": {
     "turbo": "^2.4.2"
   },
