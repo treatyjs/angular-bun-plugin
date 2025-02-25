@@ -1,0 +1,20 @@
+{
+  "name": "@treaty/typed-http",
+  "version": "0.0.3",
+  "scripts": {
+    "build": "ng-packagr -p ng-package.json"
+  },
+  "dependencies": {
+    "@standard-schema/spec": "^1.0.0"
+  },
+  "devDependencies": {
+    "ng-packagr": "^19",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5",
+    "@angular/core": "^19",
+    "@angular/common": "^19",
+    "rxjs": "^7"
+  }
+}

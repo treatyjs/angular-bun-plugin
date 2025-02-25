@@ -49,7 +49,7 @@
     },
     "packages/bun-angular": {
       "name": "@treaty/bun-angular",
-      "version": "0.0.2",
+      "version": "0.0.3",
       "dependencies": {
         "@angular/build": "^18.0.0 || ^19.0.0",
         "@angular/compiler-cli": "^18.0.0 || ^19.0.0",
@@ -69,13 +69,29 @@
     },
     "packages/bun-angular-router": {
       "name": "@treaty/bun-angular-router",
-      "version": "0.0.2",
+      "version": "0.0.3",
       "devDependencies": {
         "@angular/router": "^19.0.0",
         "@types/bun": "latest",
       },
       "peerDependencies": {
         "@angular/router": "^18.0.0 || ^19.0.0",
+        "typescript": "^5",
+      },
+    },
+    "packages/typed-http": {
+      "name": "@treaty/typed-http",
+      "dependencies": {
+        "@standard-schema/spec": "^1.0.0",
+      },
+      "devDependencies": {
+        "@types/bun": "latest",
+        "ng-packagr": "^19",
+      },
+      "peerDependencies": {
+        "@angular/common": "^19",
+        "@angular/core": "^19",
+        "rxjs": "^7",
         "typescript": "^5",
       },
     },
@@ -569,11 +585,15 @@
 
     "@sindresorhus/merge-streams": ["@sindresorhus/merge-streams@2.3.0", "", {}, "sha512-LtoMMhxAlorcGhmFYI+LhPgbPZCkgP6ra1YL604EeF6U98pLlQ3iWIGMdWSC+vWmPBWBNgmDBAhnAobLROJmwg=="],
 
+    "@standard-schema/spec": ["@standard-schema/spec@1.0.0", "", {}, "sha512-m2bOd0f2RT9k8QJx1JN85cZYyH1RqFBdlwtkSlf4tBDYLCiiZnv1fIIwacK6cqwXavOydf0NPToMQgpKq+dVlA=="],
+
     "@treaty/bun-angular": ["@treaty/bun-angular@workspace:packages/bun-angular"],
 
     "@treaty/bun-angular-example": ["@treaty/bun-angular-example@workspace:apps/bun-angular-example"],
 
     "@treaty/bun-angular-router": ["@treaty/bun-angular-router@workspace:packages/bun-angular-router"],
+
+    "@treaty/typed-http": ["@treaty/typed-http@workspace:packages/typed-http"],
 
     "@types/babel__core": ["@types/babel__core@7.20.5", "", { "dependencies": { "@babel/parser": "^7.20.7", "@babel/types": "^7.20.7", "@types/babel__generator": "*", "@types/babel__template": "*", "@types/babel__traverse": "*" } }, "sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA=="],
 
