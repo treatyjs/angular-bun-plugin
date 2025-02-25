@@ -1,25 +1,35 @@
 {
   "name": "@treaty/bun-angular-router",
-  "version": "0.0.1",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "version": "0.0.3",
   "packageManager": "bun@1.2.3",
-  "type": "module",
-  "private": false,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/treatyjs/angular-bun-plugin.git",
+    "directory": "packages/bun-angular-router"
+  },
+  "bugs": "https://github.com/treatyjs/angular-bun-plugin/issues",
+  "homepage": "https://github.com/treatyjs/angular-bun-plugin",
+  "files": [
+    "dist/",
+    "README.md"
+  ],
+  "publishConfig": {
+    "provenance": true,
+    "access": "public"
+  },
   "exports": {
-		"./package.json": "./package.json",
-		"./README.md": "./README.md",
-		".": {
-			"bun": "./dist/index.js",
-			"import": "./dist/index.js"
-	  }
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    }
   },
   "scripts": {
     "check-types": "tsc --noEmit",
-    "build": "bun build ./src/index.ts --outdir dist"
+    "build": "tsup"
   },
   "devDependencies": {
+    "@angular/router": "^19.0.0",
     "@types/bun": "latest"
   },
   "peerDependencies": {

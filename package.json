@@ -10,11 +10,12 @@
     "turbo": "^2.4.2"
   },
   "devDependencies": {
-    "@angular/compiler-cli": "^19.0.0",
     "@angular/build": "^19.0.0",
+    "@angular/compiler-cli": "^19.0.0",
     "@angular/service-worker": "^19.0.0",
     "@ngtools/webpack": "^19.0.0",
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "tsup": "^8.3.6"
   },
   "peerDependencies": {
     "typescript": "^5"

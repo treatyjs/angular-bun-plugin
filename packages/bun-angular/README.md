@@ -1,15 +1,22 @@
-# bun-angular
+# @treaty/bun-angular
 
-To install dependencies:
+Warning this package is still in early stages.
 
-```bash
-bun install
+
+## How to use
+
+In root of your application you should have a bunfig.toml. If not you will need to create one.
+
+Either add or edit the `[serve.static]` section and in the publig add `"@treaty/bun-angular"`
+
+### Example
+```
+[serve.static]
+plugins = [
+    "@treaty/bun-angular"
+]
 ```
 
-To run:
+## Tailwind support?
 
-```bash
-bun run index.ts
-```
-
-This project was created using `bun init` in bun v1.2.4. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+This package works out of the box with the `bun-plugin-tailwind`

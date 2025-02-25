@@ -21,7 +21,8 @@
     "@angular/ssr": "^19.1.7",
     "@treaty/bun-angular-router": "workspace:*",
     "@treaty/bun-angular": "workspace:*",
-    "bun-plugin-tailwind": "^0.0.14"
+    "bun-plugin-tailwind": "^0.0.14",
+    "rxjs": "^7.4.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.1.8",
