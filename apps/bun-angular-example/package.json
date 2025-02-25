@@ -3,10 +3,10 @@
   "module": "main.ts",
   "type": "module",
   "private": true,
-  "packageManager": "bun",
+  "packageManager": "bun@1.2.3",
   "scripts": {
     "check-types": "tsc --noEmit",
-    "build": "bun build --output dist"
+    "build": "bun build ./index.html --minify --outdir=dist"
   },
   "dependencies": {
     "@angular/animations": "^19.1.7",

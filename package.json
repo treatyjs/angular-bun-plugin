@@ -3,15 +3,25 @@
   "module": "index.ts",
   "type": "module",
   "private": true,
-  "packageManager": "bun",
+  "packageManager": "bun@1.2.3",
   "workspaces": ["packages/*", "apps/*"],
   "dependencies": {
+    "@changesets/cli": "^2.28.1",
     "turbo": "^2.4.2"
   },
   "devDependencies": {
+    "@angular/compiler-cli": "^19.0.0",
+    "@angular/build": "^19.0.0",
+    "@angular/service-worker": "^19.0.0",
+    "@ngtools/webpack": "^19.0.0",
     "@types/bun": "latest"
   },
   "peerDependencies": {
     "typescript": "^5"
+  },
+  "author": {
+    "name": "Jordan-Hall",
+    "url": "https://github.com/jordan-hall",
+    "email": "jordan@libertyware.co.uk"
   }
 }

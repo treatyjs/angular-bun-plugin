@@ -1,28 +1,42 @@
 {
   "name": "@treaty/bun-angular",
   "version": "0.0.1",
-  "module": "src/index.ts",
-  "packageManager": "bun",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "exports": {
+		"./package.json": "./package.json",
+		"./README.md": "./README.md",
+		".": {
+			"bun": "./dist/index.js",
+			"import": "./dist/index.js"
+	  }
+  },
+  "packageManager": "bun@1.2.3",
   "type": "module",
-  "private": true,
+  "private": false,
   "scripts": {
     "check-types": "tsc --noEmit",
     "build": "bun build ./src/index.ts --outdir dist --target bun"
   },
   "dependencies": {
-    "@babel/core": "^7.26.9"
+    "@babel/core": "^7.26.9",
+    "@babel/preset-typescript": "7.26.0",
+    "ng-packagr": "^19.0.0",
+    "@angular/compiler-cli": "^18.0.0 || ^19.0.0",
+    "@angular/build": "^18.0.0 || ^19.0.0",
+    "@angular/service-worker": "^18.0.0 || ^19.0.0",
+    "@ngtools/webpack": "^18.0.0 || ^19.0.0"
   },
   "devDependencies": {
     "@types/babel__core": "^7.20.5",
     "@types/bun": "latest"
   },
   "peerDependencies": {
-    "typescript": "^5",
-    "@angular/compiler-cli": "^18.0.0 || ^19.0.0",
-    "@angular/build": "^18.0.0 || ^19.0.0",
-    "@angular/service-worker": "^18.0.0 || ^19.0.0",
-    "@babel/preset-typescript": "^7.26.9",
-    "ng-packagr": "^18.0.0 || ^19.0.0",
-    "@ngtools/webpack": "^18.0.0 || ^19.0.0"
-  }
+    "typescript": "^5"
+  },
+  "author": {
+		"name": "Jordan-Hall",
+		"url": "https://github.com/jordan-hall",
+		"email": "jordan@libertyware.co.uk"
+	}
 }

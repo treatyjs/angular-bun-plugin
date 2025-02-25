@@ -1,10 +1,20 @@
 {
   "name": "@treaty/bun-angular-router",
   "version": "0.0.1",
-  "module": "src/index.ts",
-  "packageManager": "bun",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "packageManager": "bun@1.2.3",
   "type": "module",
   "private": false,
+  "exports": {
+		"./package.json": "./package.json",
+		"./README.md": "./README.md",
+		".": {
+			"bun": "./dist/index.js",
+			"import": "./dist/index.js"
+	  }
+  },
   "scripts": {
     "check-types": "tsc --noEmit",
     "build": "bun build ./src/index.ts --outdir dist"
@@ -15,5 +25,10 @@
   "peerDependencies": {
     "typescript": "^5",
     "@angular/router": "^18.0.0 || ^19.0.0"
-  }
+  },
+  "author": {
+		"name": "Jordan-Hall",
+		"url": "https://github.com/jordan-hall",
+		"email": "jordan@libertyware.co.uk"
+	}
 }
